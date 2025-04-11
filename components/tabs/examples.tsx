@@ -45,6 +45,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { motion } from "framer-motion";
+import { contrastColor } from "@/hooks/contrast-color";
 
 interface ExamplesProps {
   color: Colord;
@@ -112,7 +113,12 @@ export default function Examples({ color, activeColor }: ExamplesProps) {
             <TabsTrigger
               value="buttons"
               style={{
-                color: activeTab === "buttons" ? activeColor : undefined,
+                backgroundColor:
+                  activeTab === "buttons" ? activeColor : "transparent",
+                color:
+                  activeTab === "buttons"
+                    ? contrastColor(activeColor)
+                    : "inherit",
               }}
             >
               Buttons
@@ -120,21 +126,38 @@ export default function Examples({ color, activeColor }: ExamplesProps) {
             <TabsTrigger
               value="charts"
               style={{
-                color: activeTab === "charts" ? activeColor : undefined,
+                backgroundColor:
+                  activeTab === "charts" ? activeColor : "transparent",
+                color:
+                  activeTab === "charts"
+                    ? contrastColor(activeColor)
+                    : "inherit",
               }}
             >
               Charts
             </TabsTrigger>
             <TabsTrigger
               value="forms"
-              style={{ color: activeTab === "forms" ? activeColor : undefined }}
+              style={{
+                backgroundColor:
+                  activeTab === "forms" ? activeColor : "transparent",
+                color:
+                  activeTab === "forms"
+                    ? contrastColor(activeColor)
+                    : "inherit",
+              }}
             >
               Forms
             </TabsTrigger>
             <TabsTrigger
               value="components"
               style={{
-                color: activeTab === "components" ? activeColor : undefined,
+                backgroundColor:
+                  activeTab === "components" ? activeColor : "transparent",
+                color:
+                  activeTab === "components"
+                    ? contrastColor(activeColor)
+                    : "inherit",
               }}
             >
               Components

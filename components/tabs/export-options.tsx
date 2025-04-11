@@ -9,7 +9,9 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Copy, Download } from "lucide-react";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
-import { Card } from "./ui/card";
+import { Card } from "../ui/card";
+import { contrastColor } from "@/hooks/contrast-color";
+import { TabsContent } from "@radix-ui/react-tabs";
 
 interface ExportOptionsProps {
   color: Colord;
@@ -106,30 +108,53 @@ $color-primary-dark: ${color.darken(0.2).toHex()};
   return (
     <div className="space-y-6">
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid grid-cols-4 mb-4">
+        <TabsList
+          className="grid grid-cols-4 mb-4 border"
+          style={{ borderColor: activeColor }}
+        >
           <TabsTrigger
             value="css"
-            style={{ color: activeTab === "css" ? activeColor : undefined }}
+            style={{
+              backgroundColor:
+                activeTab === "css" ? activeColor : "transparent",
+              color:
+                activeTab === "css" ? contrastColor(activeColor) : "inherit",
+            }}
           >
             CSS
           </TabsTrigger>
           <TabsTrigger
             value="tailwind"
             style={{
-              color: activeTab === "tailwind" ? activeColor : undefined,
+              backgroundColor:
+                activeTab === "tailwind" ? activeColor : "transparent",
+              color:
+                activeTab === "tailwind"
+                  ? contrastColor(activeColor)
+                  : "inherit",
             }}
           >
             Tailwind
           </TabsTrigger>
           <TabsTrigger
             value="scss"
-            style={{ color: activeTab === "scss" ? activeColor : undefined }}
+            style={{
+              backgroundColor:
+                activeTab === "scss" ? activeColor : "transparent",
+              color:
+                activeTab === "scss" ? contrastColor(activeColor) : "inherit",
+            }}
           >
             SCSS
           </TabsTrigger>
           <TabsTrigger
             value="json"
-            style={{ color: activeTab === "json" ? activeColor : undefined }}
+            style={{
+              backgroundColor:
+                activeTab === "json" ? activeColor : "transparent",
+              color:
+                activeTab === "json" ? contrastColor(activeColor) : "inherit",
+            }}
           >
             JSON
           </TabsTrigger>
@@ -141,9 +166,12 @@ $color-primary-dark: ${color.darken(0.2).toHex()};
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.2 }}
         >
-          {activeTab === "css" && (
+          <TabsContent value="css">
             <div className="space-y-4">
-              <Card className="p-4 border rounded-lg">
+              <Card
+                className="p-4 border rounded-lg"
+                style={{ borderColor: activeColor }}
+              >
                 <pre
                   className="text-xs overflow-x-auto whitespace-pre-wrap font-mono"
                   style={{ color: activeColor }}
@@ -154,7 +182,7 @@ $color-primary-dark: ${color.darken(0.2).toHex()};
               <div className="flex gap-2">
                 <Button
                   variant="outline"
-                  className="flex-1 hover:border-opacity-100 hover:bg-opacity-10"
+                  className="flex-1"
                   onClick={() =>
                     handleCopyToClipboard(cssVariables, "CSS variables")
                   }
@@ -167,7 +195,7 @@ $color-primary-dark: ${color.darken(0.2).toHex()};
                 </Button>
                 <Button
                   variant="outline"
-                  className="flex-1 hover:border-opacity-100 hover:bg-opacity-10"
+                  className="flex-1"
                   onClick={() =>
                     handleDownload(cssVariables, "color-variables.css")
                   }
@@ -180,11 +208,14 @@ $color-primary-dark: ${color.darken(0.2).toHex()};
                 </Button>
               </div>
             </div>
-          )}
+          </TabsContent>
 
-          {activeTab === "tailwind" && (
+          <TabsContent value="tailwind">
             <div className="space-y-4">
-              <Card className="p-4 border rounded-lg">
+              <Card
+                className="p-4 border rounded-lg"
+                style={{ borderColor: activeColor }}
+              >
                 <pre
                   className="text-xs overflow-x-auto whitespace-pre-wrap font-mono"
                   style={{ color: activeColor }}
@@ -221,11 +252,14 @@ $color-primary-dark: ${color.darken(0.2).toHex()};
                 </Button>
               </div>
             </div>
-          )}
+          </TabsContent>
 
-          {activeTab === "scss" && (
+          <TabsContent value="scss">
             <div className="space-y-4">
-              <Card className="p-4 border rounded-lg">
+              <Card
+                className="p-4 border rounded-lg"
+                style={{ borderColor: activeColor }}
+              >
                 <pre
                   className="text-xs overflow-x-auto whitespace-pre-wrap font-mono"
                   style={{ color: activeColor }}
@@ -262,11 +296,14 @@ $color-primary-dark: ${color.darken(0.2).toHex()};
                 </Button>
               </div>
             </div>
-          )}
+          </TabsContent>
 
-          {activeTab === "json" && (
+          <TabsContent value="json">
             <div className="space-y-4">
-              <Card className="p-4 border rounded-lg">
+              <Card
+                className="p-4 border rounded-lg"
+                style={{ borderColor: activeColor }}
+              >
                 <pre
                   className="text-xs overflow-x-auto whitespace-pre-wrap font-mono"
                   style={{ color: activeColor }}
@@ -299,7 +336,7 @@ $color-primary-dark: ${color.darken(0.2).toHex()};
                 </Button>
               </div>
             </div>
-          )}
+          </TabsContent>
         </motion.div>
       </Tabs>
     </div>

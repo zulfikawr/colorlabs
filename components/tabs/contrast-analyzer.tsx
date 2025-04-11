@@ -11,6 +11,7 @@ import { colord } from "colord";
 import { AlertCircle, Check, X, ArrowLeftRight } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { motion } from "framer-motion";
+import { Card } from "../ui/card";
 
 interface ContrastAnalyzerProps {
   color: Colord;
@@ -115,7 +116,7 @@ export default function ContrastAnalyzer({
             <Label className="text-sm font-medium mb-2 block">
               Common Colors
             </Label>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap justify-center gap-2">
               {getCommonColors().map((commonColor) => (
                 <button
                   key={commonColor}
@@ -130,7 +131,7 @@ export default function ContrastAnalyzer({
             </div>
           </div>
 
-          <div className="mt-4">
+          <div className="flex justify-center mt-4">
             <HexColorPicker
               color={contrastColor}
               onChange={handleColorChange}
@@ -147,7 +148,7 @@ export default function ContrastAnalyzer({
           <Label className="text-sm font-medium mb-2 block">
             Contrast Results
           </Label>
-          <div className="p-6 bg-gray-50 rounded-lg shadow-md">
+          <Card className="p-6 border" style={{ borderColor: activeColor }}>
             <div
               className="text-3xl font-bold text-center mb-4"
               style={{ color: activeColor }}
@@ -248,7 +249,7 @@ export default function ContrastAnalyzer({
                 </Alert>
               </TabsContent>
             </Tabs>
-          </div>
+          </Card>
         </motion.div>
       </div>
     </div>

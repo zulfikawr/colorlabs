@@ -17,10 +17,10 @@ import { Copy, RefreshCw } from "lucide-react";
 import { motion } from "framer-motion";
 import { Label } from "@/components/ui/label";
 import { contrastColor } from "@/hooks/contrast-color";
+import { copyColor } from "@/hooks/copy-share";
 
 interface ColorSchemeProps {
   color: Colord;
-  onCopy: (text: string) => void;
   activeColor: string;
 }
 
@@ -33,11 +33,7 @@ type SchemeType =
   | "split-complementary"
   | "shades";
 
-export default function ColorScheme({
-  color,
-  onCopy,
-  activeColor,
-}: ColorSchemeProps) {
+export default function ColorScheme({ color, activeColor }: ColorSchemeProps) {
   const [schemeType, setSchemeType] = useState<SchemeType>("complementary");
   const [count, setCount] = useState(5); // For monochromatic and shades
   const [angle, setAngle] = useState(30); // For analogous and split-complementary
@@ -281,7 +277,7 @@ export default function ColorScheme({
                 variant="ghost"
                 size="sm"
                 className="h-6 w-6 p-0 hover:bg-opacity-10"
-                onClick={() => onCopy(colorHex)}
+                onClick={() => copyColor(colorHex)}
                 style={
                   {
                     color: activeColor,
